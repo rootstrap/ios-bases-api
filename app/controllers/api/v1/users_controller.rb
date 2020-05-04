@@ -1,6 +1,8 @@
 module Api
   module V1
     class UsersController < Api::V1::ApiController
+      skip_after_action :update_auth_header, only: :delete_account
+
       def show; end
 
       def profile
@@ -10,6 +12,10 @@ module Api
       def update
         current_user.update!(user_params)
         render :show
+      end
+
+      def delete_account
+        current_user.destroy!
       end
 
       private

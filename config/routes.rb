@@ -12,8 +12,9 @@ Rails.application.routes.draw do
       get :status, to: 'api#status'
 
       devise_scope :user do
-        resource :user, only: %i[update show] do
+        resource :user, only: %i[update show delete] do
           get :profile
+          delete :delete_account
         end
       end
       resources :settings, only: [] do
